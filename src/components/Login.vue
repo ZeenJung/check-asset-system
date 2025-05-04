@@ -42,8 +42,6 @@
 
       <!----- Table ----->
 
-
-      <h3 class="badge text-bg-dark">รายการทรัพย์สิน</h3>
       <table class="table table-bordered table-striped">
         <thead class="table-dark">
           <tr>
