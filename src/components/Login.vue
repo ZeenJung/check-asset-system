@@ -9,7 +9,9 @@
 
     <div class="d-flex ms-auto gap-2">
       <button class="btn btn-outline-light" @click="openScanner">QRcode</button>
-      <a href="#" class="btn btn-outline-light">Login</a>
+      <button class="btn btn-outline-light" @click="showLoginForm = true">Login</button>
+
+
     </div>
   </header>
 
@@ -71,6 +73,33 @@
       </tbody>
     </table>
   </div>
+
+
+  <!-- Modal Login -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">เข้าสู่ระบบ</h5>
+        <button type="button" class="btn-close" @click="closeLoginForm"></button>
+      </div>
+      <div class="modal-body">
+        <form @submit.prevent="login">
+          <div class="mb-3">
+            <label for="username" class="form-label">ชื่อผู้ใช้</label>
+            <input type="text" class="form-control" id="username" v-model="username" required />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">รหัสผ่าน</label>
+            <input type="password" class="form-control" id="password" v-model="password" required />
+          </div>
+          <button type="submit" class="btn btn-primary w-100">เข้าสู่ระบบ</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 </template>
 
 <script>
@@ -83,105 +112,124 @@ export default {
       currentPage: 1,
       perPage: 5,
       assets: [
-      {
-            img: "/src/assets/Table0001.jpg",
-            number: "711000702743014",
-            desc: "โต๊ะทำงาน ขนาด 160 x 80 x 75 ซม.",
-            location: "E1",
-            room: "306",
-            status: "Normal",
-          },
-          {
-            img: "/src/assets/Table0001.jpg",
-            number: "711000702741114",
-            desc: "โต๊ะทำงาน ขนาด 160 x 80 x 75 ซม.",
-            location: "E1",
-            room: "306",
-            status: "Normal",
-          },
-          {
-            img: "/src/assets/chair0001.jpg",
-            number: "711000702744414",
-            desc: "เก้าอี้ทำงาน ขนาด 50*45*85 ซม. 148/106",
-            location: "E1",
-            room: "306",
-            status: "Damaged",
-          },
-          {
-            img: "/src/assets/chair0001.jpg",
-            number: "711000702744414",
-            desc: "เก้าอี้ทำงาน ขนาด 50*45*85 ซม. 148/106",
-            location: "E1",
-            room: "306",
-            status: "Normal",
-          },
-          {
-            img: "/src/assets/Table0001.jpg",
-            number: "711000702744414",
-            desc: "โต๊ะทำงาน ขนาด 160 x 80 x 75 ซม.",
-            location: "E1",
-            room: "306",
-            status: "Normal",
-          },
-          {
-            img: "/src/assets/chair0001.jpg",
-            number: "711000702744414",
-            desc: "เก้าอี้ทำงาน ขนาด 50*45*85 ซม. 148/106",
-            location: "E1",
-            room: "306",
-            status: "Damaged",
-          },
-          {
-            img: "/src/assets/chair0001.jpg",
-            number: "711000702744414",
-            desc: "เก้าอี้ทำงาน ขนาด 50*45*85 ซม. 148/106",
-            location: "E1",
-            room: "306",
-            status: "Normal",
-          },
-          {
-            img: "/src/assets/chair0001.jpg",
-            number: "711000702744414",
-            desc: "เก้าอี้ทำงาน ขนาด 50*45*85 ซม. 148/106",
-            location: "E1",
-            room: "306",
-            status: "Damaged",
-          },
-          {
-            img: "/src/assets/Table0001.jpg",
-            number: "711000702744414",
-            desc: "โต๊ะทำงาน ขนาด 160 x 80 x 75 ซม.",
-            location: "E1",
-            room: "306",
-            status: "Normal",
-          },
-          {
-            img: "/src/assets/Table0001.jpg",
-            number: "711000702744414",
-            desc: "โต๊ะทำงาน ขนาด 160 x 80 x 75 ซม.",
-            location: "E1",
-            room: "306",
-            status: "Normal",
-          },
-          {
-            img: "/src/assets/Table0001.jpg",
-            number: "711000702744414",
-            desc: "โต๊ะทำงาน ขนาด 160 x 80 x 75 ซม.",
-            location: "E1",
-            room: "306",
-            status: "Normal",
-          },
-          {
-            img: "/src/assets/Table0001.jpg",
-            number: "711000702744414",
-            desc: "โต๊ะทำงาน ขนาด 160 x 80 x 75 ซม.",
-            location: "E1",
-            room: "306",
-            status: "Normal",
-          },
+        {
+          img: "/src/assets/Table0001.jpg",
+          number: "711000702743014",
+          desc: "โต๊ะทำงาน ขนาด 160 x 80 x 75 ซม.",
+          location: "E1",
+          room: "306",
+          status: "Normal",
+        },
+        {
+          img: "/src/assets/Table0001.jpg",
+          number: "711000702741114",
+          desc: "โต๊ะทำงาน ขนาด 160 x 80 x 75 ซม.",
+          location: "E1",
+          room: "306",
+          status: "Normal",
+        },
+        {
+          img: "/src/assets/chair0001.jpg",
+          number: "711000702744414",
+          desc: "เก้าอี้ทำงาน ขนาด 50*45*85 ซม. 148/106",
+          location: "E1",
+          room: "306",
+          status: "Damaged",
+        },
+        {
+          img: "/src/assets/chair0001.jpg",
+          number: "711000702744414",
+          desc: "เก้าอี้ทำงาน ขนาด 50*45*85 ซม. 148/106",
+          location: "E1",
+          room: "306",
+          status: "Normal",
+        },
+        {
+          img: "/src/assets/Table0001.jpg",
+          number: "711000702744414",
+          desc: "โต๊ะทำงาน ขนาด 160 x 80 x 75 ซม.",
+          location: "E1",
+          room: "306",
+          status: "Normal",
+        },
+        {
+          img: "/src/assets/chair0001.jpg",
+          number: "711000702744414",
+          desc: "เก้าอี้ทำงาน ขนาด 50*45*85 ซม. 148/106",
+          location: "E1",
+          room: "306",
+          status: "Damaged",
+        },
+        {
+          img: "/src/assets/chair0001.jpg",
+          number: "711000702744414",
+          desc: "เก้าอี้ทำงาน ขนาด 50*45*85 ซม. 148/106",
+          location: "E1",
+          room: "306",
+          status: "Normal",
+        },
+        {
+          img: "/src/assets/chair0001.jpg",
+          number: "711000702744414",
+          desc: "เก้าอี้ทำงาน ขนาด 50*45*85 ซม. 148/106",
+          location: "E1",
+          room: "306",
+          status: "Damaged",
+        },
+        {
+          img: "/src/assets/Table0001.jpg",
+          number: "711000702744414",
+          desc: "โต๊ะทำงาน ขนาด 160 x 80 x 75 ซม.",
+          location: "E1",
+          room: "306",
+          status: "Normal",
+        },
+        {
+          img: "/src/assets/Table0001.jpg",
+          number: "711000702744414",
+          desc: "โต๊ะทำงาน ขนาด 160 x 80 x 75 ซม.",
+          location: "E1",
+          room: "306",
+          status: "Normal",
+        },
+        {
+          img: "/src/assets/chair0001.jpg",
+          number: "711000702744414",
+          desc: "เก้าอี้ทำงาน ขนาด 50*45*85 ซม. 148/106",
+          location: "E1",
+          room: "306",
+          status: "Damaged",
+        },
+        {
+          img: "/src/assets/chair0001.jpg",
+          number: "711000702744414",
+          desc: "เก้าอี้ทำงาน ขนาด 50*45*85 ซม. 148/106",
+          location: "E1",
+          room: "306",
+          status: "Damaged",
+        },
+        {
+          img: "/src/assets/Table0001.jpg",
+          number: "711000702744414",
+          desc: "โต๊ะทำงาน ขนาด 160 x 80 x 75 ซม.",
+          location: "E1",
+          room: "306",
+          status: "Normal",
+        },
+        {
+          img: "/src/assets/Table0001.jpg",
+          number: "711000702744414",
+          desc: "โต๊ะทำงาน ขนาด 160 x 80 x 75 ซม.",
+          location: "E1",
+          room: "306",
+          status: "Normal",
+        },
       ],
       qrResult: "",
       qrScanner: null,
+      username: '',
+      password: '',
+      showLoginForm: false,
     };
   },
   computed: {
@@ -191,6 +239,17 @@ export default {
     },
     totalPages() {
       return Math.ceil(this.assets.length / this.perPage);
+    },
+  },
+  watch: {
+    showLoginForm(newVal) {
+      const loginModalEl = document.getElementById("loginModal");
+      const modal = new Modal(loginModalEl);
+      if (newVal) {
+        modal.show();
+      } else {
+        modal.hide();
+      }
     },
   },
   methods: {
@@ -231,8 +290,19 @@ export default {
         });
       }
     },
-  },
-};
+    closeLoginForm() {
+      this.showLoginForm = false;
+    },
+    login() {
+  if (this.username === 'admin' && this.password === '1234') {
+    alert('เข้าสู่ระบบสำเร็จ');
+    this.$router.push('/Home.vue');  // เปลี่ยนเส้นทางไปหน้า Home
+  } else {
+    alert('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
+  }
+}
+}
+}
 </script>
 
 <style scoped>
