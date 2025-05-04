@@ -11,6 +11,38 @@
     </header>
   
     <div class="container mt-5 pt-5">
+        <nav>
+  <!------ Pagination (แบ่งหน้าา) ------->
+  <ul class="pagination justify-content-start"> <!-- เปลี่ยน justify-content-center เป็น justify-content-start -->
+    <li
+      class="page-item"
+      :class="{ disabled: currentPage === 1 }"
+      @click="goToPage(currentPage - 1)"
+    >
+      <a class="page-link" href="#"><</a>
+    </li>
+    <li
+      v-for="page in totalPages"
+      :key="page"
+      class="page-item"
+      :class="{ active: currentPage === page }"
+      @click="goToPage(page)"
+    >
+      <a class="page-link" href="#">{{ page }}</a>
+    </li>
+    <li
+      class="page-item"
+      :class="{ disabled: currentPage === totalPages }"
+      @click="goToPage(currentPage + 1)"
+    >
+      <a class="page-link" href="#">></a>
+    </li>
+  </ul>
+</nav>
+
+      <!----- Table ----->
+
+
       <h3 class="badge text-bg-dark">รายการทรัพย์สิน</h3>
       <table class="table table-bordered table-striped">
         <thead class="table-dark">
@@ -41,38 +73,10 @@
           </tr>
         </tbody>
       </table>
-  
-      <!-- Pagination -->
-      <nav>
-        <ul class="pagination justify-content-center">
-          <li
-            class="page-item"
-            :class="{ disabled: currentPage === 1 }"
-            @click="goToPage(currentPage - 1)"
-          >
-            <a class="page-link" href="#">Previous</a>
-          </li>
-          <li
-            v-for="page in totalPages"
-            :key="page"
-            class="page-item"
-            :class="{ active: currentPage === page }"
-            @click="goToPage(page)"
-          >
-            <a class="page-link" href="#">{{ page }}</a>
-          </li>
-          <li
-            class="page-item"
-            :class="{ disabled: currentPage === totalPages }"
-            @click="goToPage(currentPage + 1)"
-          >
-            <a class="page-link" href="#">Next</a>
-          </li>
-        </ul>
-      </nav>
     </div>
   </template>
   
+<!----- Java Script ----->
   <script>
   export default {
     data() {
@@ -144,6 +148,46 @@
             room: "306",
             status: "Damaged",
           },
+          {
+            img: "/src/assets/Table0001.jpg",
+            number: "711000702744414",
+            desc: "โต๊ะทำงาน ขนาด 160 x 80 x 75 ซม.",
+            location: "E1",
+            room: "306",
+            status: "Normal",
+          },
+          {
+            img: "/src/assets/Table0001.jpg",
+            number: "711000702744414",
+            desc: "โต๊ะทำงาน ขนาด 160 x 80 x 75 ซม.",
+            location: "E1",
+            room: "306",
+            status: "Normal",
+          },
+          {
+            img: "/src/assets/Table0001.jpg",
+            number: "711000702744414",
+            desc: "โต๊ะทำงาน ขนาด 160 x 80 x 75 ซม.",
+            location: "E1",
+            room: "306",
+            status: "Normal",
+          },
+          {
+            img: "/src/assets/Table0001.jpg",
+            number: "711000702744414",
+            desc: "โต๊ะทำงาน ขนาด 160 x 80 x 75 ซม.",
+            location: "E1",
+            room: "306",
+            status: "Normal",
+          },
+          {
+            img: "/src/assets/Table0001.jpg",
+            number: "711000702744414",
+            desc: "โต๊ะทำงาน ขนาด 160 x 80 x 75 ซม.",
+            location: "E1",
+            room: "306",
+            status: "Normal",
+          },
         ],
       };
     },
@@ -165,8 +209,15 @@
     },
   };
   </script>
+
+<!----- CSS ----->
   
   <style scoped>
+  .table-dark th {
+    background-color: #010939 !important;
+  color: white !important;
+}
+
   .navbar {
     width: 100%;
     background-color: #010939;
